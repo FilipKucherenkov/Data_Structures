@@ -3,16 +3,25 @@ import java.util.List;
 
 
 /**
- * Min heap class.
+ * Min-Heap data structure. Smallest integer is always on top.
  */
 public class MinHeap {
 
-    List<Integer> heap;
+    private List<Integer> heap;
 
+    /**
+     * Constructor for class MinHeap. Takes an array of integers and builds a heap from them.
+     * @param array - the given array.
+     */
     public MinHeap(List<Integer> array){
         heap = buildHeap(array);
     }
 
+    /**
+     * Given an array of integers build a Min-heap.
+     * @param array - given array.
+     * @return - heap
+     */
     private List<Integer> buildHeap(List<Integer> array) {
         int parentIndex = (array.size()-1)/2;
         for(int currentIndex = parentIndex; currentIndex >=0; currentIndex--){
@@ -21,6 +30,11 @@ public class MinHeap {
         return array;
     }
 
+    /**
+     * Sift an element up until it's on it's place.
+     * @param currentIndex - index at which to start sifting.
+     * @param heap - the heap.
+     */
     private void siftUp(int currentIndex, List<Integer> heap){
         if(currentIndex < 0){
             throw new IllegalArgumentException("Invalid Index provided");
@@ -28,19 +42,23 @@ public class MinHeap {
         int parentIndex = (currentIndex - 1) / 2;
 
         //swap until it satisfies the "heap property"
-        while(parentIndex > 0 && heap.get(currentIndex) < heap.get(parentIndex)){
-
+        while(currentIndex > 0 && heap.get(currentIndex) < heap.get(parentIndex)){
             //swap
             int tmp = heap.get(currentIndex);
             heap.set(currentIndex, heap.get(parentIndex));
             heap.set(parentIndex,tmp);
-
 
             currentIndex = parentIndex;
             parentIndex = (currentIndex - 1) / 2;
         }
     }
 
+    /**
+     * Sift an element down until it's on it's right place.
+     * @param currentIndex - index at which sifting starts.
+     * @param endIndex - last index in the heap.
+     * @param heap - the heap.
+     */
     private void siftDown(int currentIndex, int endIndex, List<Integer> heap){
         if(currentIndex < 0){
             throw new IllegalArgumentException("Invalid Index provided");
@@ -68,10 +86,13 @@ public class MinHeap {
             }else{
                 return;
             }
-
         }
     }
 
+    /**
+     * Remove the smallest element of the heap.
+     * @return the removed element.
+     */
     public int remove(){
         //swap last with first
         // 1. swap first and last
@@ -87,6 +108,10 @@ public class MinHeap {
         return tmp;
     }
 
+    /**
+     * Insert a new element in the heap.
+     * @param element - element to be inserted.
+     */
     public void insert(int element){
         //1. Insert element at the back
         heap.add(element);
@@ -94,10 +119,16 @@ public class MinHeap {
         siftUp(heap.size()-1, heap);
     }
 
+    /**
+     * @return the size of the heap.
+     */
     public int size(){
         return heap.size();
     }
 
+    /**
+     * @return the smallest element in the heap.
+     */
     public int peek(){
         // As smallest element is always on top.
         return heap.get(0);
