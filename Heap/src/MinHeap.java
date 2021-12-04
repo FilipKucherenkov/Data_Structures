@@ -10,16 +10,16 @@ public class MinHeap {
     private List<Integer> heap;
 
     /**
-     * Constructor for class MinHeap. Takes an array of integers and builds a heap from them.
-     * @param array - the given array.
+     * Constructor for class MinHeap. Takes a list of integers and builds a heap from them.
+     * @param array - the given list.
      */
     public MinHeap(List<Integer> array){
         heap = buildHeap(array);
     }
 
     /**
-     * Given an array of integers build a Min-heap.
-     * @param array - given array.
+     * Given a list of integers build a Min-heap.
+     * @param array - given list.
      * @return - heap
      */
     private List<Integer> buildHeap(List<Integer> array) {
